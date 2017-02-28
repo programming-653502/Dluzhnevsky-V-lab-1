@@ -1,0 +1,22 @@
+#include <vcl.h>
+#include "stdafx.h"
+#pragma hdrstop
+#include <iostream>
+#include <math.h>
+using namespace std;
+int main()
+{
+	double p = 1.0;
+	int N;
+	double f;
+
+	cout << "Write N: ";  cin >> N;
+	cout << "Write f: ";  cin >> f;
+
+	for (int k = 1; k <= N; k++)
+		p = p * (1.0 - f*f / (2 * k + 1));
+
+	cout << "Result: " << p << endl;
+
+	cin.ignore();
+	cin.get();
