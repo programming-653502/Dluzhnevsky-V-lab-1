@@ -1,0 +1,69 @@
+// ConsoleApplication2.cpp: определяет точку входа для консольного приложения.
+//
+
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+
+int main()
+{
+	int a, b, c, d, e, f, g, h;
+	cout << "enter the value of the car\n";
+	cin >> a;
+	cout << "enter release year\n";
+	cin >> b;
+	cout << "enter the volume of engines\n";
+	cin >> c;
+	cout << "enter the run in kilometers\n";
+	cin >> d;
+	e = d * 0.5;
+	cout << e << "$ the cost of the run\n";
+
+	h = 2017 - b;
+
+	if (h <= 3)
+	{
+		f = c*0.6;
+		cout << f << "$ price clearance\n " << endl;
+	}
+	else
+	{
+		if ((3 < h < 10) && (c < 2500))
+		{
+			f = c*0.3;
+			cout << f << "$ price clearance\n ";
+		}
+		else
+		{
+			if ((3 < h < 10) && (c >= 2500))
+			{
+				f = c*0.6;
+				cout << f << "$ price clearance\n ";
+			}
+			else
+			{
+				if (10 < h < 14)
+				{
+					f = c*0.6;
+					cout << f << "$ price clearance\n ";
+				}
+				else
+				{
+					if (h >= 14)
+					{
+						f = c*0.6;
+						cout << f << "$ price clearance\n ";
+					}
+				}
+			}
+		}
+	}
+
+	g = a + e + f;
+	cout << g <<"$ Full price\n";
+
+	cout << "Vsevolod Dluzhnevsky developer of program\n";
+	system("pause");
+	return 0;
+}
