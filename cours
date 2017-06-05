@@ -13,8 +13,6 @@
 
 using namespace std;
 
-
-
 HANDLE hConsole;
 //HANDLE hStdout, hStdin;
 HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -109,16 +107,16 @@ void skorostGame(Game &g) // Функцыя старта змейки ее ко�
 }
 void Level()
 {
-	GotoXY(10, 10); cout << "Vy nikogda ne vyigraete" << endl; //НАДПИСЬ: Вы никогда не выиграете
-	GotoXY(10, 11); cout << "esli ne budete bditelny!" << endl; //НАДПИСЬ: Если не будете бдительны!
+	GotoXY(10, 10); cout << "You will never win " << endl; //НАДПИСЬ: Вы никогда не выиграете
+	GotoXY(10, 11); cout << "if you not be carefull!" << endl; //НАДПИСЬ: Если не будете бдительны!
 }
 void ZmejaStart()
 {
-	GotoXY(10, 15); cout << "Soberi 50 yablok, togda posmotrim ;)" << endl; //НАДПИСЬ: Собери 50 яблок, тогда посмотрим ;)
+	GotoXY(10, 15); cout << "collect 50 apples, and then we see ;)" << endl; //НАДПИСЬ: Собери 50 яблок, тогда посмотрим ;)
 }
 void STENA_2() //Вся информация, отображаемая на стене
 {
-	SetColor(LightBlue, Black); GotoXY(20, 0); cout << "Snake game by Dluzhnevsky Vsevolod" << endl; 
+	SetColor(LightBlue, Black); GotoXY(20, 0); cout << "Snake game by Dluzhnevsky Vsevolod" << endl;  
 	GotoXY(64, 2); cout << "Dannue:" << endl; //Данные
 	GotoXY(64, 3); cout << "Yablok:0" << endl; //Яблок
 	GotoXY(64, 4); cout << "Dlina:3" << endl; //Длина
@@ -222,7 +220,7 @@ int Move(Game &g)
 
 	if (next.X == g.jabloko.X && next.Y == g.jabloko.Y)
 	{
-		COORD*temp = new COORD[++n]; //новый масив больший на 1
+		COORD*temp = new COORD[++n]; //новый масив увеличенный на 1
 		for (int i = 0; i < n; i++)
 			temp[i] = g.gaduka.t[i]; //перекопируем
 		temp[n - 1] = next; //добавляем одну
@@ -230,7 +228,7 @@ int Move(Game &g)
 		g.gaduka.t = temp;
 
 		SetConsoleCursorPosition(hConsole, head);
-		SetConsoleTextAttribute(hConsole, 0x0a); //закрашываем яблоко которое сели 
+		SetConsoleTextAttribute(hConsole, 0x0a); //закрашываем яблоко которое сьели 
 		printf("*");
 		SetConsoleCursorPosition(hConsole, next);
 		SetConsoleTextAttribute(hConsole, 0x0a);
@@ -257,12 +255,12 @@ int Move(Game &g)
 
 int intro()
 {
-	GotoXY(3, 10); //Интруха
-	printf("ЋЎлз­ п §¬Ґ©Є . “Їа ў«Ґ­ЁҐ §¬ҐоЄ®© - бваҐ«®зЄ ¬Ё. Esc - ўле®¤ Ё§ ЁЈал.");
+	GotoXY(3, 10); //Начальный экран
+	printf("Гsual snake .Сontrol the snake with arrows. Esc - exit.");
 	GotoXY(15, 11);
-	printf("…б«Ё б®ЎҐасвҐ 50 пЎ«®Є, в® ў б ¦¤св боаЇаЁ§ ;)");
+	printf("collect 50 apples to win");
 	GotoXY(18, 15);
-	printf("„«п Їа®¤®«¦Ґ­Ёп влЄ­ЁвҐ ­   ­ЁЄҐ© :D");
+	printf("press any key to start:D");
 	getch();
 }
 
@@ -312,7 +310,7 @@ int main()
 				if (count == 50)
 				{
 					SetColor(White, Black);
-					GotoXY(24, 1); cout << "Vy vyigrali! Pozdravlyayu! Vy ne chelovek! xD" << endl; //Вы выиграли
+					GotoXY(24, 1); cout << "You win, exelent  xD" << endl; //Вы выиграли
 					getch();
 					return(0);
 				}
@@ -321,7 +319,7 @@ int main()
 			case STENA:
 
 			case KONEC:
-				GotoXY(23, 1); printf("‚л Їа®ЁЈа «Ё! • -е -е !!!\n\n\t\t\t"); //Вы проиграли, ХА ХА ХА
+				GotoXY(23, 1); printf("You lose, ))))))))))"); //Вы проиграли, ХА ХА ХА
 				getch();
 				break;
 			}
@@ -367,3 +365,5 @@ int main()
 		}
 	}
 }
+
+
