@@ -1,0 +1,132 @@
+program Project1;
+ 
+type
+  TData = Integer;
+  TPElem = ^TElem;
+  TElem = record
+    Data : TData;
+    PNext : TPElem; 
+  end;
+  TDList = record
+    PFirst, PLast : TPElem; 
+  end;
+ 
+procedure Init(var aL : TDList);
+begin
+  aL.PFirst := nil;
+  aL.PLast := nil;
+end;
+ 
+procedure LFree(var aL : TDList);
+var
+  P, PDel : TPElem;
+begin
+  P := aL.PFirst; 
+  while P <> nil do
+  begin
+    PDel := P; 
+    P := P^.PNext; 
+    Dispose(PDel); 
+  end;
+  Init(aL);
+end;
+
+procedure AddAsc(var aL : TDList; const aData : TData);
+var
+  PNew, PCur, PPrev : TPElem;
+begin
+  New(PNew); 
+  PNew^.Data := aData; 
+  PCur := aL.PFirst;
+  PPrev := nil;
+  while (PCur <> nil) and (PCur^.Data < aData) do
+  begin
+    PPrev := PCur;
+    PCur := PCur^.PNext;
+  end;
+ 
+  PNew^.PNext := PCur;
+  if PPrev <> nil then 
+    PPrev^.PNext := PNew
+  else 
+    aL.PFirst := PNew;
+  if PNew^.PNext = nil then 
+    aL.PLast := PNew;
+end;
+ 
+procedure MergeAsc(const aL1, aL2 : TDList; var aL3 : TDList);
+var
+  P : TPElem;
+begin
+  LFree(aL3);
+  P := aL1.PFirst;
+  while P <> nil do
+  begin
+    AddAsc(aL3, P^.Data);
+    P := P^.PNext;
+  end;
+  {Слияние второго списка.}
+  P := aL2.PFirst;
+  while P <> nil do
+  begin
+    AddAsc(aL3, P^.Data);
+    P := P^.PNext;
+  end;
+end;
+ 
+procedure LWriteln(const aL : TDList);
+var
+  P : TPElem;
+begin
+  P := aL.PFirst; 
+  if P <> nil then
+  repeat
+    if P <> aL.PFirst then
+      Write(', ');
+    Write(P^.Data); 
+    P := P^.PNext; 
+  until P = nil
+  else
+    Write('Список пуст.');
+  Writeln;
+end;
+ 
+const
+  M = 5; 
+var
+  L1, L2, L3 : TDList;
+  i : Integer;
+  S : String;
+begin
+  Init(L1);
+  Init(L2);
+  Init(L3);
+ 
+  repeat
+    
+    Randomize; 
+    for i := 1 to M do
+    begin
+      AddAsc(L1, Random(100)); 
+      AddAsc(L2, Random(100));
+    end;
+    Writeln('Заданы списки: ');
+    LWriteln(L1);
+    LWriteln(L2);
+ 
+    {Слияние списков L1 и L2 в список L3 с упорядочиванием элементов по неубыванию.}
+    MergeAsc(L1, L2, L3);
+ 
+    {Ответ.}
+    Writeln('Результат слияния:');
+    LWriteln(L3);
+ 
+    LFree(L1);
+    LFree(L2);
+    LFree(L3);
+    Writeln('Память, выделенная для списков, освобождена.');
+ 
+    Writeln('Повторить - Enter, выход - любой символ + Enter.');
+    Readln(S);
+  until S <> '';
+end.
