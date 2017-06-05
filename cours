@@ -118,7 +118,7 @@ void ZmejaStart()
 }
 void STENA_2() //Вся информация, отображаемая на стене
 {
-	SetColor(LightBlue, Black); GotoXY(20, 0); cout << "Snake game by Danilenko Alexander" << endl;  //НАДПИСЬ: Игра Змейка Даниленко Александра
+	SetColor(LightBlue, Black); GotoXY(20, 0); cout << "Snake game by Dluzhnevsky Vsevolod" << endl; 
 	GotoXY(64, 2); cout << "Dannue:" << endl; //Данные
 	GotoXY(64, 3); cout << "Yablok:0" << endl; //Яблок
 	GotoXY(64, 4); cout << "Dlina:3" << endl; //Длина
