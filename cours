@@ -220,7 +220,7 @@ int Move(Game &g)
 
 	if (next.X == g.jabloko.X && next.Y == g.jabloko.Y)
 	{
-		COORD*temp = new COORD[++n]; //новый масив увеличенный на 1
+		COORD*temp = new COORD[++n]; //новый масив больший на 1
 		for (int i = 0; i < n; i++)
 			temp[i] = g.gaduka.t[i]; //перекопируем
 		temp[n - 1] = next; //добавляем одну
@@ -228,7 +228,7 @@ int Move(Game &g)
 		g.gaduka.t = temp;
 
 		SetConsoleCursorPosition(hConsole, head);
-		SetConsoleTextAttribute(hConsole, 0x0a); //закрашываем яблоко которое сьели 
+		SetConsoleTextAttribute(hConsole, 0x0a); //закрашываем яблоко которое сели 
 		printf("*");
 		SetConsoleCursorPosition(hConsole, next);
 		SetConsoleTextAttribute(hConsole, 0x0a);
@@ -365,5 +365,3 @@ int main()
 		}
 	}
 }
-
-
